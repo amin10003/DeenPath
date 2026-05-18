@@ -1,9 +1,28 @@
-import React from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-export default function App() {
+import Navbar from "./components/ui/Navbar";
+
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+
+function App() {
   return (
-    <>
-    <div className='bg-amber-200 text-center text-3xl font-bold min-h-screen'>This is my starter Up of Deen Path project</div>
-    </>
-  )
+  <>
+      {/* Navbar appears on all pages */}
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route path="/login" element={<Login />} />
+
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
+
+      </>
+    
+  );
 }
+
+export default App;

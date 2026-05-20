@@ -10,6 +10,7 @@ import Salah from "./pages/salah";
 // Protected Route
 import ProtectedRoute from "./components/ProtectedRoute";
 import Islam from "./pages/islam";
+import Zakat from "./pages/Zakat";
 
 function App() {
 
@@ -63,6 +64,15 @@ function App() {
           element={
             <ProtectedRoute>
               <Islam />
+            </ProtectedRoute>
+          }
+        />
+
+             <Route
+          path="/zakat"
+          element={
+            <ProtectedRoute>
+              <Zakat />
             </ProtectedRoute>
           }
         />

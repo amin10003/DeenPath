@@ -79,7 +79,8 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col justify-between items-center card shadow-md m-4 shadow-black w-112.5 p-4 rounded-lg">
+    <div className="flex justify-center items-center min-h-screen bg-amber-100">
+    <div className="flex flex-col justify-center items-center card shadow-md m-4 shadow-black w-112.5 p-4 rounded-lg bg-amber-400">
       <h2 className="text-2xl font-bold mb-4">Login Page</h2>
 
       {/* Login Form */}
@@ -132,6 +133,7 @@ export default function Login() {
           Signup
         </Link>
       </p>
+    </div>
     </div>
   );
 }

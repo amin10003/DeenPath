@@ -115,68 +115,63 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex flex-col justify-between items-center card shadow-md m-4 shadow-black w-112.5 p-4 rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Signup Page</h2>
+    <div className="flex justify-center items-center min-h-screen bg-amber-100">
+      <div className="flex flex-col justify-center items-center card shadow-md m-4 shadow-black w-112.5 p-4 rounded-lg bg-amber-400">
+        <h2 className="text-2xl font-bold mb-4">Signup Page</h2>
 
-      {/* Signup Form */}
-      <form
-        onSubmit={handleSignup}
-        className="w-full flex flex-col items-center"
-      >
-        {/* Name Input */}
-        <input
-          className="w-full p-2 my-2 border rounded"
-          type="text"
-          name="name"
-          placeholder="Enter name"
-          onChange={handleChanges}
-        />
-
-        {/* Email Input */}
-        <input
-          className="w-full p-2 my-2 border rounded"
-          type="email"
-          name="email"
-          placeholder="Email"
-          onChange={handleChanges}
-        />
-
-        {/* Password Input */}
-        <input
-          className="w-full p-2 my-2 border rounded"
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChanges}
-        />
-
-        {/* Create Account Button */}
-        <button
-          type="submit"
-          className="bg-black text-white px-4 py-2 rounded mt-3"
+        {/* Signup Form */}
+        <form
+          onSubmit={handleSignup}
+          className="w-full flex flex-col items-center"
         >
-          Create Account
+          <input
+            className="w-full p-2 my-2 border rounded"
+            type="text"
+            name="name"
+            placeholder="Enter name"
+            onChange={handleChanges}
+          />
+
+          <input
+            className="w-full p-2 my-2 border rounded"
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChanges}
+          />
+
+          <input
+            className="w-full p-2 my-2 border rounded"
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChanges}
+          />
+
+          <button
+            type="submit"
+            className="bg-black text-white px-4 py-2 rounded mt-3"
+          >
+            Create Account
+          </button>
+        </form>
+
+        <button
+          onClick={handleGoogleSignup}
+          className="bg-blue-600 text-white px-4 py-2 rounded mt-4"
+        >
+          Continue With Google
         </button>
-      </form>
 
-      {/* Google Signup Button */}
-      <button
-        onClick={handleGoogleSignup}
-        className="bg-blue-600 text-white px-4 py-2 rounded mt-4"
-      >
-        Continue With Google
-      </button>
+        <div className="mt-3">{message && <p>{message}</p>}</div>
 
-      {/* Success/Error Message */}
-      <div className="mt-3">{message && <p>{message}</p>}</div>
-
-      {/* Toggle to Login Page */}
-      <p className="mt-4">
-        Already have an account?
-        <Link to="/login" className="text-blue-600 ml-2">
-          Login
-        </Link>
-      </p>
+        <p className="mt-4">
+          Already have an account?
+          <Link to="/login" className="text-blue-600 ml-2">
+            Login
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

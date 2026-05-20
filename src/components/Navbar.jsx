@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 // Logout component
-import Logout from "../Logout";
+import Logout from "./Logout";
 
 function Navbar() {
   return (

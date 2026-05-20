@@ -15,6 +15,9 @@ function Navbar() {
         <Link to="/salah" className="text-white">
           Salah
         </Link>
+           <Link to="/islam" className="text-white">
+          islam
+        </Link>
       </div>
 
       {/* Right side logout */}

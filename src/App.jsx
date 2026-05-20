@@ -9,6 +9,7 @@ import Salah from "./pages/salah";
 
 // Protected Route
 import ProtectedRoute from "./components/ProtectedRoute";
+import Islam from "./pages/islam";
 
 function App() {
 
@@ -52,6 +53,16 @@ function App() {
           element={
             <ProtectedRoute>
               <Salah />
+            </ProtectedRoute>
+          }
+        />
+
+        
+        <Route
+          path="/islam"
+          element={
+            <ProtectedRoute>
+              <Islam />
             </ProtectedRoute>
           }
         />

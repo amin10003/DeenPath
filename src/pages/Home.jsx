@@ -2,6 +2,7 @@ import { AppContext } from "@/context/AppContex";
 import React from "react";
 import { useContext } from "react";
 
+import { Link, Outlet } from "react-router-dom";
 
 function Home() {
   const { state } = useContext(AppContext);
@@ -12,6 +13,14 @@ function Home() {
           Deen Path Application
         </h1>
         <h2>Welcome {state.user?.displayName}</h2>
+        {/* <div>
+          <h1>Welcome to the Dashboard page. Hope you enjoy</h1>
+          <nav>
+            <Link to="islam">Islam</Link>
+            <Link to="accounts">Accounts</Link>
+          </nav>
+          <Outlet />
+        </div> */}
       </div>
     </>
   );

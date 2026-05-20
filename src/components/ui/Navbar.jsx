@@ -1,26 +1,24 @@
 import { Link } from "react-router-dom";
 
+// Logout component
+import Logout from "../Logout";
+
 function Navbar() {
   return (
-    <nav
-      style={{
-        display: "flex",
-        gap: "20px",
-        padding: "20px",
-        background: "#1e293b",
-      }}
-    >
-      <Link to="/" style={{ color: "white" }}>
-        Home
-      </Link>
+    <nav className="bg-[#1e293b] flex justify-between p-4">
+      {/* Left side links */}
+      <div className="flex gap-5">
+        <Link to="/" className="text-white">
+          Home
+        </Link>
 
-      <Link to="/login" style={{ color: "white" }}>
-        Login
-      </Link>
+        <Link to="/salah" className="text-white">
+          Salah
+        </Link>
+      </div>
 
-      <Link to="/signup" style={{ color: "white" }}>
-        Signup
-      </Link>
+      {/* Right side logout */}
+      <Logout />
     </nav>
   );
 }

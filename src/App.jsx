@@ -11,74 +11,87 @@ import Salah from "./pages/salah";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Islam from "./pages/islam";
 import Zakat from "./pages/Zakat";
+import { useContext } from "react";
+import { AppContext } from "./context/AppContex";
+import Quran from "./pages/Quran";
+import Surah from "./pages/Surah";
 
 function App() {
+  const { state } = useContext(AppContext);
 
   return (
     <>
+      <div
+        className={
+          state.theme === "dark"
+            ? "bg-black text-white min-h-screen transition-all"
+            : "bg-white text-black min-h-screen transition-all"
+        }
+      >
+        {/* Navbar appears on all pages */}
+        <ProtectedRoute>
+          <Navbar />
+        </ProtectedRoute>
 
-      {/* Navbar appears on all pages */}
-      <Navbar />
+        <Routes>
+          <Route path="/login" element={<Login />} />
 
-      <Routes>
+          <Route path="/signup" element={<SignUp />} />
 
-        {/* ================================= */}
-        {/* PUBLIC ROUTES */}
-        {/* ================================= */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/login"
-          element={<Login />}
-        />
+          <Route
+            path="/islam"
+            element={
+              <ProtectedRoute>
+                <Islam />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/salah"
+            element={
+              <ProtectedRoute>
+                <Salah />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/signup"
-          element={<SignUp />}
-        />
+          <Route
+            path="/zakat"
+            element={
+              <ProtectedRoute>
+                <Zakat />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* ================================= */}
-        {/* PROTECTED ROUTES */}
-        {/* ================================= */}
+          <Route
+            path="/quran"
+            element={
+              <ProtectedRoute>
+                <Quran />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/salah"
-          element={
-            <ProtectedRoute>
-              <Salah />
-            </ProtectedRoute>
-          }
-        />
-
-        
-        <Route
-          path="/islam"
-          element={
-            <ProtectedRoute>
-              <Islam />
-            </ProtectedRoute>
-          }
-        />
-
-             <Route
-          path="/zakat"
-          element={
-            <ProtectedRoute>
-              <Zakat />
-            </ProtectedRoute>
-          }
-        />
-
-      </Routes>
-
+          <Route
+            path="/surah/:id"
+            element={
+              <ProtectedRoute>
+                <Surah />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </div>
     </>
   );
 }

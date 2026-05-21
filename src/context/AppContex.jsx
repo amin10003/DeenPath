@@ -8,6 +8,9 @@ const initialState = {
   hadith: [],
   prayerTimes: {},
   user: null,
+
+  theme: "light",
+  loading: false,
 };
 
 export function AppProvider({ children }) {

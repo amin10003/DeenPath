@@ -4,6 +4,7 @@ export function Reducer(state, action) {
       return {
         ...state,
         user: action.payload,
+        loading: false,
       };
 
     case "SET_QURAN":
@@ -22,6 +23,12 @@ export function Reducer(state, action) {
       return {
         ...state,
         prayerTimes: action.payload,
+      };
+
+    case "TOGGLE_THEME":
+      return {
+        ...state,
+        theme: state.theme === "dark" ? "light" : "dark",
       };
 
     default:

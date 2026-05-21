@@ -48,85 +48,107 @@ function Home() {
 
   // Islamic date
   const hijriDate = prayerData.date.hijri;
-
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    // Removed bg-gray-100 so it respects App.jsx layout background
+    <div className="p-6 transition-colors duration-200">
       {/* Dashboard Title */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold">
           Assalamu Alaikum, {state.user?.displayName || "Muslim"}
         </h1>
-
-        <p className="text-gray-600 mt-2">Welcome to your Islamic Dashboard</p>
+        <p
+          className={`mt-2 ${state.theme === "dark" ? "text-gray-400" : "text-gray-600"}`}
+        >
+          Welcome to your Islamic Dashboard
+        </p>
       </div>
 
       {/* Dashboard Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Next Prayer */}
-        <div className="bg-white rounded-xl shadow-md p-5">
+        <div
+          className={`${state.theme === "dark" ? "bg-slate-900 border border-slate-800" : "bg-white shadow-md"} rounded-xl p-5`}
+        >
           <div className="flex items-center gap-3 mb-4">
             <Clock3 className="text-green-600" />
-
             <h2 className="text-xl font-semibold">Fajr</h2>
           </div>
-
-          <p className="text-gray-600">{timings.Fajr}</p>
+          <p
+            className={
+              state.theme === "dark" ? "text-gray-300" : "text-gray-600"
+            }
+          >
+            {timings.Fajr}
+          </p>
         </div>
 
         {/* Islamic Date */}
-        <div className="bg-white rounded-xl shadow-md p-5">
+        <div
+          className={`${state.theme === "dark" ? "bg-slate-900 border border-slate-800" : "bg-white shadow-md"} rounded-xl p-5`}
+        >
           <div className="flex items-center gap-3 mb-4">
             <CalendarDays className="text-blue-600" />
-
             <h2 className="text-xl font-semibold">Islamic Date</h2>
           </div>
-
-          <p className="text-gray-600">
+          <p
+            className={
+              state.theme === "dark" ? "text-gray-300" : "text-gray-600"
+            }
+          >
             {hijriDate.day} {hijriDate.month.en} {hijriDate.year} AH
           </p>
         </div>
 
         {/* Quran Card */}
-        <div className="bg-white rounded-xl shadow-md p-5">
+        <div
+          className={`${state.theme === "dark" ? "bg-slate-900 border border-slate-800" : "bg-white shadow-md"} rounded-xl p-5`}
+        >
           <div className="flex items-center gap-3 mb-4">
             <BookOpen className="text-purple-600" />
-
             <h2 className="text-xl font-semibold">Quran Reading</h2>
           </div>
-
-          <p className="text-gray-600">Continue Surah Al-Baqarah</p>
+          <p
+            className={
+              state.theme === "dark" ? "text-gray-300" : "text-gray-600"
+            }
+          >
+            Continue Surah Al-Baqarah
+          </p>
         </div>
 
         {/* Islamic Event */}
-        <div className="bg-white rounded-xl shadow-md p-5">
+        <div
+          className={`${state.theme === "dark" ? "bg-slate-900 border border-slate-800" : "bg-white shadow-md"} rounded-xl p-5`}
+        >
           <div className="flex items-center gap-3 mb-4">
             <MoonStar className="text-yellow-600" />
-
             <h2 className="text-xl font-semibold">Maghrib</h2>
           </div>
-
-          <p className="text-gray-600">{timings.Maghrib}</p>
+          <p
+            className={
+              state.theme === "dark" ? "text-gray-300" : "text-gray-600"
+            }
+          >
+            {timings.Maghrib}
+          </p>
         </div>
       </div>
 
       {/* Extra Prayer Section */}
-      <div className="mt-10 bg-white p-6 rounded-xl shadow-md">
+      <div
+        className={`mt-10 p-6 rounded-xl ${state.theme === "dark" ? "bg-slate-900 border border-slate-800" : "bg-white shadow-md"}`}
+      >
         <h2 className="text-2xl font-bold mb-4">Today's Prayer Times</h2>
-
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <p>Fajr: {timings.Fajr}</p>
-
           <p>Dhuhr: {timings.Dhuhr}</p>
-
           <p>Asr: {timings.Asr}</p>
-
           <p>Maghrib: {timings.Maghrib}</p>
-
           <p>Isha: {timings.Isha}</p>
         </div>
       </div>
 
-      <NextPrayerCard  timings={timings} />
+      <NextPrayerCard timings={timings} />
     </div>
   );
 }

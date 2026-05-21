@@ -1,33 +1,25 @@
-import { useContext } from "react";
-
-import { Navigate } from "react-router-dom";
-
-// Global context
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AppContext } from "@/context/AppContex";
 
+
 function ProtectedRoute({ children }) {
+  const { state } = useContext(AppContext);
+  const navigate = useNavigate();
+  const user = state.user
 
-  // Access global state
-  const { state } =
-    useContext(AppContext);
+  // If NO user exists in global state, cleanly boot them to login
+  useEffect(() => {
+    if (!user) {
+      navigate("/login", {replace:true});
+    }
+  }, [user, navigate]);
 
-  // Get logged in user
-  const user = state.user;
-
-  // If no user exists
-  // redirect to login page
-  if (!user) {
-
-    return (
-      <Navigate
-        to="/login"
-        replace
-      />
-    );
+  if(!user){
+    return null
+  } else {
+   return children
   }
-
-  // Otherwise show protected page
-  return children;
 }
 
 export default ProtectedRoute;

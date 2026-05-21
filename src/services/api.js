@@ -52,3 +52,10 @@ export const getPrayerTimes = async (city) => {
 
   return data;
 };
+
+// ===============================
+// SURAH RECITATION (AUDIO ONLY)
+// ===============================
+export const getSurahRecitation = (surahNumber) => {
+  return `https://api.alquran.cloud/v1/surah/${surahNumber}/ar.alafasy`;
+};

@@ -13,8 +13,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  // Access global dispatch
-  const { dispatch } = useContext(AppContext);
+  // Access global state and dispatch
+  const { state, dispatch } = useContext(AppContext);
 
   // Used to navigate user to another page
   const navigate = useNavigate();
@@ -79,61 +79,85 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-amber-100">
-    <div className="flex flex-col justify-center items-center card shadow-md m-4 shadow-black w-112.5 p-4 rounded-lg bg-amber-400">
-      <h2 className="text-2xl font-bold mb-4">Login Page</h2>
-
-      {/* Login Form */}
-      <form
-        onSubmit={handleLogin}
-        className="w-full flex flex-col items-center"
+    <div
+      className={`flex justify-center items-center min-h-screen transition-colors duration-300 ${
+        state.theme === "dark"
+          ? "bg-zinc-950 text-white"
+          : "bg-gray-100 text-black"
+      }`}
+    >
+      <div
+        className={`flex flex-col justify-center items-center card shadow-md m-4 shadow-black w-112.5 p-4 rounded-lg ${
+          state.theme === "dark"
+            ? "bg-slate-900 border border-slate-800"
+            : "bg-grey-00"
+        }`}
       >
-        {/* Email Input */}
-        <input
-          placeholder="Email"
-          name="email"
-          className="w-full p-2 my-2 border rounded"
-          type="email"
-          onChange={handleChanges}
-        />
+        <h2 className="text-2xl font-bold mb-4">Login Page</h2>
 
-        {/* Password Input */}
-        <input
-          className="w-full p-2 my-2 border rounded"
-          type="password"
-          placeholder="Password"
-          name="password"
-          onChange={handleChanges}
-        />
-
-        {/* Login Button */}
-        <button
-          type="submit"
-          className="bg-black text-white px-4 py-2 rounded mt-3"
+        {/* Login Form */}
+        <form
+          onSubmit={handleLogin}
+          className="w-full flex flex-col items-center"
         >
-          Login
+          {/* Email Input */}
+          <input
+            placeholder="Email"
+            name="email"
+            className={`w-full p-2 my-2 border rounded ${
+              state.theme === "dark"
+                ? "bg-slate-800 text-white border-slate-700"
+                : "bg-white text-black"
+            }`}
+            type="email"
+            onChange={handleChanges}
+          />
+
+          {/* Password Input */}
+          <input
+            className={`w-full p-2 my-2 border rounded ${
+              state.theme === "dark"
+                ? "bg-slate-800 text-white border-slate-700"
+                : "bg-white text-black"
+            }`}
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={handleChanges}
+          />
+
+          {/* Login Button */}
+          <button
+            type="submit"
+            className={`px-4 py-2 rounded mt-3 transition-colors duration-300 ${
+              state.theme === "dark"
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white"
+                : "bg-black text-white"
+            }`}
+          >
+            Login
+          </button>
+        </form>
+
+        {/* Google Authentication Button */}
+        <button
+          onClick={handleGoogleLogin}
+          className="bg-blue-600 text-white px-4 py-2 rounded mt-4"
+        >
+          Continue With Google
         </button>
-      </form>
 
-      {/* Google Authentication Button */}
-      <button
-        onClick={handleGoogleLogin}
-        className="bg-blue-600 text-white px-4 py-2 rounded mt-4"
-      >
-        Continue With Google
-      </button>
+        {/* Success/Error Message */}
+        <div className="mt-3">{message && <p>{message}</p>}</div>
 
-      {/* Success/Error Message */}
-      <div className="mt-3">{message && <p>{message}</p>}</div>
-
-      {/* Toggle to Signup Page */}
-      <p className="mt-4">
-        Don't have an account?
-        <Link to="/signup" className="text-blue-600 ml-2">
-          Signup
-        </Link>
-      </p>
-    </div>
+        {/* Toggle to Signup Page */}
+        <p className="mt-4">
+          Don't have an account?
+          <Link to="/signup" className="text-blue-600 ml-2">
+            Signup
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

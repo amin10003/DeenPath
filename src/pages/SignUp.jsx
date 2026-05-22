@@ -17,13 +17,11 @@ import { useNavigate, Link } from "react-router-dom";
 export default function Signup() {
   const [namee, setNamee] = useState("");
   const [email, setEmail] = useState("");
-
   const [password, setPassword] = useState("");
-
   const [message, setMessage] = useState("");
 
-  // Access global dispatch
-  const { dispatch } = useContext(AppContext);
+  // Access global state and dispatch
+  const { state, dispatch } = useContext(AppContext);
 
   // Used for page navigation
   const navigate = useNavigate();
@@ -39,7 +37,7 @@ export default function Signup() {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password,
+        password
       );
 
       // Add user display name
@@ -66,37 +64,7 @@ export default function Signup() {
 
   // HANDLE GOOGLE SIGNUP
 
-  const handleGoogleSignup = async () => {
-    try {
-      // Create Firebase account
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      );
-
-      // Add display name
-      await updateProfile(userCredential.user, {
-        displayName: namee,
-      });
-
-      // Refresh current user
-      await auth.currentUser.reload();
-
-      // Save updated user globally
-      dispatch({
-        type: "SET_USER",
-        payload: auth.currentUser,
-      });
-
-      // Success message
-      setMessage("Account created successfully");
-
-      // Navigate to home page
-      navigate("/");
-    } catch (err) {
-      setMessage(err.message);
-    }
+   const handleGoogleSignup = async () => {
   };
 
   // HANDLE INPUT CHANGES
@@ -115,8 +83,16 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-amber-100">
-      <div className="flex flex-col justify-center items-center card shadow-md m-4 shadow-black w-112.5 p-4 rounded-lg bg-amber-400">
+    <div
+      className={`flex justify-center items-center min-h-screen transition-colors duration-300 ${
+        state.theme === "dark" ? "bg-zinc-950 text-white" : "bg-gray-100 text-black"
+      }`}
+    >
+      <div
+        className={`flex flex-col justify-center items-center card shadow-md m-4 shadow-black w-112.5 p-4 rounded-lg ${
+          state.theme === "dark" ? "bg-slate-900 border border-slate-800" : "bg-gray-400"
+        }`}
+      >
         <h2 className="text-2xl font-bold mb-4">Signup Page</h2>
 
         {/* Signup Form */}
@@ -125,7 +101,9 @@ export default function Signup() {
           className="w-full flex flex-col items-center"
         >
           <input
-            className="w-full p-2 my-2 border rounded"
+            className={`w-full p-2 my-2 border rounded ${
+              state.theme === "dark" ? "bg-slate-800 text-white border-slate-700" : "bg-white text-black"
+            }`}
             type="text"
             name="name"
             placeholder="Enter name"
@@ -133,7 +111,9 @@ export default function Signup() {
           />
 
           <input
-            className="w-full p-2 my-2 border rounded"
+            className={`w-full p-2 my-2 border rounded ${
+              state.theme === "dark" ? "bg-slate-800 text-white border-slate-700" : "bg-white text-black"
+            }`}
             type="email"
             name="email"
             placeholder="Email"
@@ -141,7 +121,9 @@ export default function Signup() {
           />
 
           <input
-            className="w-full p-2 my-2 border rounded"
+            className={`w-full p-2 my-2 border rounded ${
+              state.theme === "dark" ? "bg-slate-800 text-white border-slate-700" : "bg-white text-black"
+            }`}
             type="password"
             name="password"
             placeholder="Password"
@@ -150,7 +132,9 @@ export default function Signup() {
 
           <button
             type="submit"
-            className=" text-white px-4 py-2 rounded mt-3"
+            className={`px-4 py-2 rounded mt-3 transition-colors duration-300 ${
+              state.theme === "dark" ? "bg-emerald-600 hover:bg-emerald-700 text-white" : "bg-black text-white"
+            }`}
           >
             Create Account
           </button>

@@ -156,7 +156,7 @@ function Islam() {
       }`}
     >
       {/* HERO */}
-      <div className="relative overflow-hidden rounded-[40px] bg-gradient-to-r from-emerald-700 to-teal-700 p-10">
+      <div className="relative overflow-hidden rounded-[40px] bg-linear-to-r from-emerald-700 to-teal-700 p-10">
         <div className="absolute top-0 right-0 opacity-10">
           <MoonStar size={300} />
         </div>

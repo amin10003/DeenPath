@@ -15,7 +15,7 @@ import { useContext } from "react";
 import { AppContext } from "./context/AppContex";
 import Quran from "./pages/Quran";
 import Surah from "./pages/Surah";
-import Dashboard from "/src/components/Dashboard.jsx"
+import Dashboard from "/src/components/Dashboard.jsx";
 
 function App() {
   const { state } = useContext(AppContext);
@@ -39,15 +39,8 @@ function App() {
 
           <Route path="/signup" element={<SignUp />} />
 
-          <Route
-            path="/"
-            element={
-             
-                <Home />
-            
-            }
-          />
-        <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/islam" element={<Islam />} />
           <Route path="/salah" element={<Salah />} />
 
@@ -55,7 +48,7 @@ function App() {
             path="/zakat"
             element={
               <ProtectedRoute>
-                <Zakat />
+                <Zakat/>
               </ProtectedRoute>
             }
           />

@@ -61,7 +61,7 @@ function Home() {
     >
       {/* HERO */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/20 to-teal-500/10 blur-3xl"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-emerald-600/20 to-teal-500/10 blur-3xl"></div>
 
         <div className="relative max-w-7xl mx-auto px-6 py-24">
           <div className="max-w-4xl">
@@ -78,7 +78,7 @@ function Home() {
 
             <h1 className="text-5xl md:text-7xl font-black leading-tight">
               Strengthen Your
-              <span className="block bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">
+              <span className="block bg-linear-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">
                 Connection With Allah
               </span>
             </h1>
@@ -122,7 +122,7 @@ function Home() {
       </section>
 
       {/* FEATURES */}
-      <section className="max-w-7xl mx-auto px-6 pb-24">
+      <section className="max-w-7xl mx-auto p-6 pb-24">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-black">
             Everything You Need

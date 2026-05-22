@@ -1,154 +1,181 @@
-import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
 
-// Global context
+// Context
 import { AppContext } from "@/context/AppContex";
 
-// API function
-import { getPrayerTimes } from "@/services/api";
-
 // Icons
-import { CalendarDays, Clock3, MoonStar, BookOpen } from "lucide-react";
-import NextPrayerCard from "@/components/NextPrayerCard";
+import {
+  BookOpen,
+  Clock3,
+  HeartHandshake,
+  MoonStar,
+  Sparkles,
+  ArrowRight,
+} from "lucide-react";
 
 function Home() {
-  // Access logged in user
   const { state } = useContext(AppContext);
 
-  // Store prayer data
-  const [prayerData, setPrayerData] = useState(null);
+  const features = [
+    {
+      title: "Prayer Times",
+      description:
+        "Get accurate daily prayer times with upcoming prayer countdown.",
+      icon: Clock3,
+      color: "text-emerald-500",
+    },
 
-  // =====================================
-  // FETCH API DATA
-  // =====================================
-  useEffect(() => {
-    const fetchPrayerData = async () => {
-      try {
-        // Fetch Nairobi prayer data
-        const data = await getPrayerTimes("Nairobi");
+    {
+      title: "Learn Islam",
+      description:
+        "Understand Islam, pillars of faith, worship, and Islamic guidance.",
+      icon: BookOpen,
+      color: "text-purple-500",
+    },
 
-        console.log(data);
+    {
+      title: "Daily Reminders",
+      description:
+        "Strengthen your faith with Quranic reminders and Islamic teachings.",
+      icon: MoonStar,
+      color: "text-amber-500",
+    },
 
-        // Save full API data
-        setPrayerData(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    {
+      title: "Zakat & Worship",
+      description:
+        "Learn Islamic obligations including Zakat, Salah, and fasting.",
+      icon: HeartHandshake,
+      color: "text-blue-500",
+    },
+  ];
 
-    fetchPrayerData();
-  }, []);
-
-  // Loading state
-  if (!prayerData) {
-    return <h1 className="text-3xl p-6">Loading...</h1>;
-  }
-
-  // Prayer timings
-  const timings = prayerData.timings;
-
-  // Islamic date
-  const hijriDate = prayerData.date.hijri;
   return (
-    // Removed bg-gray-100 so it respects App.jsx layout background
-    <div className="p-6 transition-colors duration-200">
-      {/* Dashboard Title */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold">
-          Assalamu Alaikum, {state.user?.displayName || "Muslim"}
-        </h1>
-        <p
-          className={`mt-2 ${state.theme === "dark" ? "text-gray-400" : "text-gray-600"}`}
-        >
-          Welcome to your Islamic Dashboard
-        </p>
-      </div>
+    <div
+      className={`min-h-screen transition-colors duration-300 ${
+        state.theme === "dark"
+          ? "bg-zinc-950 text-white"
+          : "bg-gray-100 text-black"
+      }`}
+    >
+      {/* HERO */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/20 to-teal-500/10 blur-3xl"></div>
 
-      {/* Dashboard Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Next Prayer */}
-        <div
-          className={`${state.theme === "dark" ? "bg-slate-900 border border-slate-800" : "bg-white shadow-md"} rounded-xl p-5`}
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <Clock3 className="text-green-600" />
-            <h2 className="text-xl font-semibold">Fajr</h2>
+        <div className="relative max-w-7xl mx-auto px-6 py-24">
+          <div className="max-w-4xl">
+            <div className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/20 w-fit px-5 py-2 rounded-full mb-8">
+              <Sparkles
+                className="text-emerald-500"
+                size={18}
+              />
+
+              <p className="text-sm">
+                Your Complete Islamic Companion
+              </p>
+            </div>
+
+            <h1 className="text-5xl md:text-7xl font-black leading-tight">
+              Strengthen Your
+              <span className="block bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">
+                Connection With Allah
+              </span>
+            </h1>
+
+            <p
+              className={`mt-8 text-xl leading-10 max-w-3xl ${
+                state.theme === "dark"
+                  ? "text-gray-300"
+                  : "text-gray-700"
+              }`}
+            >
+              An Islamic platform designed to help Muslims
+              learn Islam, track prayer times, understand
+              worship, and grow spiritually every day.
+            </p>
+
+            {/* CTA */}
+            <div className="flex flex-wrap gap-5 mt-10">
+              <Link
+                to="/dashboard"
+                className="bg-emerald-600 hover:bg-emerald-700 px-8 py-4 rounded-2xl font-semibold flex items-center gap-3 transition-all duration-300"
+              >
+                Open Dashboard
+
+                <ArrowRight size={20} />
+              </Link>
+
+              <Link
+                to="/dashboard"
+                className={`px-8 py-4 rounded-2xl font-semibold border transition-all duration-300 ${
+                  state.theme === "dark"
+                    ? "border-slate-700 hover:bg-slate-900"
+                    : "border-gray-300 hover:bg-white"
+                }`}
+              >
+                Learn About Islam
+              </Link>
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section className="max-w-7xl mx-auto px-6 pb-24">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-black">
+            Everything You Need
+          </h2>
+
           <p
-            className={
-              state.theme === "dark" ? "text-gray-300" : "text-gray-600"
-            }
+            className={`mt-5 text-lg ${
+              state.theme === "dark"
+                ? "text-gray-400"
+                : "text-gray-600"
+            }`}
           >
-            {timings.Fajr}
+            Built to help Muslims learn, practice, and stay
+            connected.
           </p>
         </div>
 
-        {/* Islamic Date */}
-        <div
-          className={`${state.theme === "dark" ? "bg-slate-900 border border-slate-800" : "bg-white shadow-md"} rounded-xl p-5`}
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <CalendarDays className="text-blue-600" />
-            <h2 className="text-xl font-semibold">Islamic Date</h2>
-          </div>
-          <p
-            className={
-              state.theme === "dark" ? "text-gray-300" : "text-gray-600"
-            }
-          >
-            {hijriDate.day} {hijriDate.month.en} {hijriDate.year} AH
-          </p>
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
 
-        {/* Quran Card */}
-        <div
-          className={`${state.theme === "dark" ? "bg-slate-900 border border-slate-800" : "bg-white shadow-md"} rounded-xl p-5`}
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <BookOpen className="text-purple-600" />
-            <h2 className="text-xl font-semibold">Quran Reading</h2>
-          </div>
-          <p
-            className={
-              state.theme === "dark" ? "text-gray-300" : "text-gray-600"
-            }
-          >
-            Continue Surah Al-Baqarah
-          </p>
-        </div>
+            return (
+              <div
+                key={index}
+                className={`rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 ${
+                  state.theme === "dark"
+                    ? "bg-slate-900 border border-slate-800"
+                    : "bg-white shadow-lg"
+                }`}
+              >
+                <Icon
+                  className={`${feature.color} mb-6`}
+                  size={45}
+                />
 
-        {/* Islamic Event */}
-        <div
-          className={`${state.theme === "dark" ? "bg-slate-900 border border-slate-800" : "bg-white shadow-md"} rounded-xl p-5`}
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <MoonStar className="text-yellow-600" />
-            <h2 className="text-xl font-semibold">Maghrib</h2>
-          </div>
-          <p
-            className={
-              state.theme === "dark" ? "text-gray-300" : "text-gray-600"
-            }
-          >
-            {timings.Maghrib}
-          </p>
-        </div>
-      </div>
+                <h3 className="text-2xl font-bold mb-4">
+                  {feature.title}
+                </h3>
 
-      {/* Extra Prayer Section */}
-      <div
-        className={`mt-10 p-6 rounded-xl ${state.theme === "dark" ? "bg-slate-900 border border-slate-800" : "bg-white shadow-md"}`}
-      >
-        <h2 className="text-2xl font-bold mb-4">Today's Prayer Times</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <p>Fajr: {timings.Fajr}</p>
-          <p>Dhuhr: {timings.Dhuhr}</p>
-          <p>Asr: {timings.Asr}</p>
-          <p>Maghrib: {timings.Maghrib}</p>
-          <p>Isha: {timings.Isha}</p>
+                <p
+                  className={`leading-8 ${
+                    state.theme === "dark"
+                      ? "text-gray-400"
+                      : "text-gray-600"
+                  }`}
+                >
+                  {feature.description}
+                </p>
+              </div>
+            );
+          })}
         </div>
-      </div>
-
-      <NextPrayerCard timings={timings} />
+      </section>
     </div>
   );
 }
